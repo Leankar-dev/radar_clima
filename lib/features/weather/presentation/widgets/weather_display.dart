@@ -25,7 +25,7 @@ class WeatherDisplay extends StatelessWidget {
               const Icon(Icons.wb_sunny_outlined, size: 50),
         ),
         Text(
-          '${weather.temperature.round()}°C', // Arredondando para ficar mais limpo
+          '${weather.temperature.round()}°C',  // Arredondando para ficar mais limpo
           style: Theme.of(context).textTheme.displayLarge?.copyWith(
             fontWeight: FontWeight.w300,
             color: Colors.blueAccent,

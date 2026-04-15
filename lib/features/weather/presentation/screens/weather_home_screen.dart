@@ -14,7 +14,9 @@ class WeatherHomeScreen extends ConsumerWidget {
     final controller = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Clima com Riverpod 3')),
+      appBar: AppBar(
+        title: const Text('Consulte o Clima'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -62,7 +64,9 @@ class WeatherHomeScreen extends ConsumerWidget {
                 ),
               ),
               loading: () => const Expanded(
-                child: Center(child: CircularProgressIndicator()),
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
               ),
             ),
           ],
