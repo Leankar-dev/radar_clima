@@ -3,15 +3,33 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:radar_clima/features/weather/presentation/widgets/weather_display.dart';
 import '../providers/weather_notifier.dart';
 
-class WeatherHomeScreen extends ConsumerWidget {
+class WeatherHomeScreen extends ConsumerStatefulWidget {
   const WeatherHomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<WeatherHomeScreen> createState() => _WeatherHomeScreenState();
+}
+
+class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     // 1. "Assistimos" o estado do nosso Notifier.
     // Sempre que o estado mudar (Loading -> Data ou Error), este widget reconstrói.
     final weatherState = ref.watch(weatherProvider);
-    final controller = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -23,7 +41,7 @@ class WeatherHomeScreen extends ConsumerWidget {
           children: [
             // Campo de Busca
             TextField(
-              controller: controller,
+              controller: _controller,
               decoration: InputDecoration(
                 labelText: 'Digite uma cidade',
                 suffixIcon: IconButton(
@@ -34,7 +52,7 @@ class WeatherHomeScreen extends ConsumerWidget {
                     // apenas chamar a função da ViewModel.
                     ref
                         .read(weatherProvider.notifier)
-                        .searchWeather(controller.text);
+                        .searchWeather(_controller.text);
                     FocusScope.of(context).unfocus(); // Fecha o teclado
                   },
                 ),
