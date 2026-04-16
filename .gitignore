@@ -46,4 +46,6 @@ app.*.map.json
 
 lib/core/constants/api_constants.dart
 docs/
+lib/core/env/
+.env
 
