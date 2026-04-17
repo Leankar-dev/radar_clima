@@ -23,6 +23,10 @@ class WeatherRepositoryImpl implements WeatherRepository {
       );
       final dto = WeatherDto.fromJson(response.data);
 
+      if (dto.weather.isEmpty) {
+        throw Exception('A API retornou dados de clima incompletos para "$city".');
+      }
+
       return WeatherModel(
         cityName: dto.name,
         temperature: dto.main.temp,
