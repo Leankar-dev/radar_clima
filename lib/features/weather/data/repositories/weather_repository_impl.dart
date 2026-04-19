@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:radar_clima/core/constants/api_constants.dart';
+import 'package:radar_clima/core/errors/failure.dart';
 import 'package:radar_clima/features/weather/data/dto/weather_dto.dart';
 import 'package:radar_clima/features/weather/data/repositories/weather_repository.dart';
 import 'package:radar_clima/features/weather/domain/models/weather_model.dart';
@@ -24,7 +25,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
       final dto = WeatherDto.fromJson(response.data);
 
       if (dto.weather.isEmpty) {
-        throw Exception('A API retornou dados de clima incompletos para "$city".');
+        throw const CityNotFoundException();
       }
 
       return WeatherModel(
@@ -35,9 +36,12 @@ class WeatherRepositoryImpl implements WeatherRepository {
             'https://openweathermap.org/img/wn/${dto.weather.first.icon}@2x.png',
       );
     } on DioException catch (e) {
-      throw Exception(
-        'Erro ao buscar clima: ${e.response?.data['message'] ?? e.message}',
-      );
+      final statusCode = e.response?.statusCode;
+
+      if (statusCode == 404) throw const CityNotFoundException();
+      if (statusCode == 401) throw const ApiKeyInvalidFailure();
+
+      throw const ServerFailure();
     }
   }
 }
