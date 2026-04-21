@@ -1,17 +1,25 @@
 import 'package:dio/dio.dart';
 import 'package:radar_clima/core/constants/api_constants.dart';
 import 'package:radar_clima/core/errors/failure.dart';
+import 'package:radar_clima/core/network/connectivity_service.dart';
 import 'package:radar_clima/features/weather/data/dto/weather_dto.dart';
 import 'package:radar_clima/features/weather/data/repositories/weather_repository.dart';
 import 'package:radar_clima/features/weather/domain/models/weather_model.dart';
 
 class WeatherRepositoryImpl implements WeatherRepository {
   final Dio _dio;
+  final ConnectivityService _connectivityService;
 
-  WeatherRepositoryImpl(this._dio);
+  WeatherRepositoryImpl(this._dio, {ConnectivityService? connectivityService})
+      : _connectivityService = connectivityService ?? ConnectivityService();
 
   @override
   Future<WeatherModel> fetchWeather(String city) async {
+    final isConnected = await _connectivityService.hasConnection();
+    if (!isConnected) {
+      throw const NetworkFailure();
+    }
+
     try {
       final response = await _dio.get(
         'weather',
