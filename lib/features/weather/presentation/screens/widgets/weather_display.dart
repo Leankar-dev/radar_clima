@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../domain/models/weather_model.dart';
+import 'package:radar_clima/core/constants/app_colors.dart';
+import '../../../domain/models/weather_model.dart';
 
 class WeatherDisplay extends StatelessWidget {
   final WeatherModel weather;
@@ -13,29 +14,30 @@ class WeatherDisplay extends StatelessWidget {
       children: [
         Text(
           weather.cityName,
-          style: Theme.of(
-            context,
-          ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: AppColors.white90,
+          ),
         ),
         const SizedBox(height: 8),
         Image.network(
           weather.iconUrl,
-          scale: 0.5, // Deixa o ícone um pouco maior
+          scale: 0.5,
           errorBuilder: (context, error, stackTrace) =>
-              const Icon(Icons.wb_sunny_outlined, size: 50),
+              const Icon(Icons.wb_sunny_outlined, size: 50, color: AppColors.accent),
         ),
         Text(
-          '${weather.temperature.round()}°C',  // Arredondando para ficar mais limpo
+          '${weather.temperature.round()}°C',
           style: Theme.of(context).textTheme.displayLarge?.copyWith(
             fontWeight: FontWeight.w300,
-            color: Colors.blueAccent,
+            color: AppColors.accent,
           ),
         ),
         Text(
           weather.description.toUpperCase(),
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            letterSpacing: 1.2,
-            color: Colors.grey[600],
+            letterSpacing: 1.4,
+            color: AppColors.white50,
           ),
         ),
       ],
