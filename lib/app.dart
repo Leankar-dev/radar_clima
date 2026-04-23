@@ -10,7 +10,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Radar Clima',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: AppColors.themeSeed)),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.themeSeed),
+      ),
       home: const WeatherHomeScreen(),
     );
   }
