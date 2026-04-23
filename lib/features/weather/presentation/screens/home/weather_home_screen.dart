@@ -38,12 +38,14 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
-          'Radar Clima',
-          style: TextStyle(
-            color: AppColors.white90,
-            fontWeight: FontWeight.w300,
-            letterSpacing: 1.4,
+        title: Center(
+          child: const Text(
+            'Radar Clima',
+            style: TextStyle(
+              color: AppColors.white90,
+              fontWeight: FontWeight.w300,
+              letterSpacing: 1.4,
+            ),
           ),
         ),
       ),
