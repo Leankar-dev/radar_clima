@@ -13,17 +13,18 @@ class WeatherHomeScreen extends ConsumerStatefulWidget {
 }
 
 class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
-  late final TextEditingController _controller;
+  // late final TextEditingController _cityEC;
+  final _cityEC = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
+    // _cityEC = TextEditingController();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _cityEC.dispose();
     super.dispose();
   }
 
@@ -74,7 +75,6 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
             left: 20,
             child: AuroraHalo(size: 220, color: AppColors.accent, alpha: 28),
           ),
-
           // --- Conteúdo ---
           SafeArea(
             child: Padding(
@@ -82,7 +82,6 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
               child: Column(
                 children: [
                   const SizedBox(height: 8),
-
                   // Campo de busca
                   Container(
                     decoration: BoxDecoration(
@@ -91,7 +90,7 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
                       border: Border.all(color: AppColors.white20),
                     ),
                     child: TextField(
-                      controller: _controller,
+                      controller: _cityEC,
                       style: const TextStyle(color: AppColors.white90),
                       cursorColor: AppColors.accent,
                       decoration: InputDecoration(
@@ -108,7 +107,7 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
                             color: AppColors.accent,
                           ),
                           onPressed: () {
-                            final city = _controller.text.trim();
+                            final city = _cityEC.text.trim();
 
                             if (city.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -130,7 +129,6 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
                               );
                               return;
                             }
-
                             ref
                                 .read(weatherProvider.notifier)
                                 .searchWeather(city);
@@ -140,9 +138,7 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 32),
-
                   weatherState.when(
                     data: (weather) => Expanded(
                       child: SingleChildScrollView(
@@ -187,4 +183,3 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
     );
   }
 }
-
