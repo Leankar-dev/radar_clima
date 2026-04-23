@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:radar_clima/core/constants/app_colors.dart';
+import 'package:radar_clima/core/errors/failure.dart';
 import 'package:radar_clima/features/weather/presentation/screens/widgets/aurora_halo.dart';
 import 'package:radar_clima/features/weather/presentation/screens/widgets/weather_display.dart';
 import '../../providers/weather_notifier.dart';
@@ -151,19 +152,36 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
                       padding: const EdgeInsets.only(top: 48),
                       child: Column(
                         children: [
-                          const Icon(
-                            Icons.error_outline,
+                          Icon(
+                            err is NetworkFailure
+                                ? Icons.wifi_off
+                                : Icons.error_outline,
                             color: AppColors.errorRed,
                             size: 60,
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            'Ops! $err',
+                            err is Failure
+                                ? err.toString()
+                                : 'Ocorreu um erro inesperado. Tente novamente.',
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               color: AppColors.white60,
                               fontSize: 15,
                             ),
+                          ),
+                          const SizedBox(height: 24),
+                          ElevatedButton.icon(
+                            onPressed: () {
+                              final city = _cityEC.text.trim();
+                              if (city.isNotEmpty) {
+                                ref
+                                    .read(weatherProvider.notifier)
+                                    .searchWeather(city);
+                              }
+                            },
+                            icon: const Icon(Icons.refresh),
+                            label: const Text('Tentar novamente'),
                           ),
                         ],
                       ),
