@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:radar_clima/core/constants/api_constants.dart';
+import 'package:radar_clima/core/network/api_interceptors.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'dio_client.g.dart';
@@ -11,5 +12,7 @@ Dio dio(Ref ref) {
     connectTimeout: const Duration(seconds: 5),
     receiveTimeout: const Duration(seconds: 3),
   );
-  return Dio(options);
+  final dio = Dio(options);
+  dio.interceptors.add(ApiInterceptor());
+  return dio;
 }
