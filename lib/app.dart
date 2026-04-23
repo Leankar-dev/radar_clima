@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:radar_clima/features/weather/presentation/screens/weather_home_screen.dart';
+import 'package:radar_clima/core/constants/app_colors.dart';
+import 'package:radar_clima/features/weather/presentation/screens/home/weather_home_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -9,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Radar Clima',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.blue)),
+      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: AppColors.themeSeed)),
       home: const WeatherHomeScreen(),
     );
   }
