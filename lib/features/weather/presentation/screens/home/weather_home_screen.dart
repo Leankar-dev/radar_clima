@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:radar_clima/core/constants/app_colors.dart';
 import 'package:radar_clima/core/errors/failure.dart';
 import 'package:radar_clima/features/weather/presentation/screens/widgets/aurora_halo.dart';
-import 'package:radar_clima/features/weather/presentation/screens/widgets/weather_display.dart';
+import 'package:radar_clima/features/weather/presentation/screens/widgets/current_weather_card.dart';
+import 'package:radar_clima/shared/widgets/loading_overlay.dart';
 import '../../providers/weather_notifier.dart';
 
 class WeatherHomeScreen extends ConsumerStatefulWidget {
@@ -145,7 +146,7 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
                   weatherState.when(
                     data: (weather) => Expanded(
                       child: SingleChildScrollView(
-                        child: WeatherDisplay(weather: weather),
+                        child: CurrentWeatherCard(weather: weather),
                       ),
                     ),
                     error: (err, stack) => Padding(
@@ -186,13 +187,7 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
                         ],
                       ),
                     ),
-                    loading: () => const Expanded(
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          color: AppColors.accent,
-                        ),
-                      ),
-                    ),
+                    loading: () => const LoadingOverlay(),
                   ),
                 ],
               ),
