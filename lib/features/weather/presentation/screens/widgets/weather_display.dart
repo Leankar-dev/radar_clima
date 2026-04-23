@@ -16,6 +16,7 @@ class WeatherDisplay extends StatelessWidget {
           weather.cityName,
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
             fontWeight: FontWeight.bold,
+            fontSize: 32,
             color: AppColors.white90,
           ),
         ),
@@ -23,8 +24,11 @@ class WeatherDisplay extends StatelessWidget {
         Image.network(
           weather.iconUrl,
           scale: 0.5,
-          errorBuilder: (context, error, stackTrace) =>
-              const Icon(Icons.wb_sunny_outlined, size: 50, color: AppColors.accent),
+          errorBuilder: (context, error, stackTrace) => const Icon(
+            Icons.wb_sunny_outlined,
+            size: 50,
+            color: AppColors.accent,
+          ),
         ),
         Text(
           '${weather.temperature.round()}°C',
