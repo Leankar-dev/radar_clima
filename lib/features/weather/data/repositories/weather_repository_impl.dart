@@ -11,7 +11,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
   final ConnectivityService _connectivityService;
 
   WeatherRepositoryImpl(this._dio, {ConnectivityService? connectivityService})
-      : _connectivityService = connectivityService ?? ConnectivityService();
+    : _connectivityService = connectivityService ?? ConnectivityService();
 
   @override
   Future<WeatherModel> fetchWeather(String city) async {
