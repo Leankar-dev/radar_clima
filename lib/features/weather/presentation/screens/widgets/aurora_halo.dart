@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:radar_clima/core/constants/app_colors.dart';
 
 class AuroraHalo extends StatelessWidget {
   final double size;
@@ -20,7 +21,7 @@ class AuroraHalo extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         gradient: RadialGradient(
-          colors: [color.withAlpha(alpha), Colors.transparent],
+          colors: [color.withAlpha(alpha), AppColors.transparent],
           stops: const [0.0, 1.0],
         ),
       ),

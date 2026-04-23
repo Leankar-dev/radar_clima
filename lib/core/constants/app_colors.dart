@@ -12,5 +12,6 @@ abstract final class AppColors {
   static const white10 = Color(0x1AFFFFFF);
   static const snackbarBg = Color(0xFF1A2040);
   static const errorRed = Color(0xFFFF6B6B);
-  static const themeSeed = Color(0xFF2196F3);
+  static const themeSeed  = Color(0xFF2196F3);
+  static const transparent = Color(0x00000000);
 }
