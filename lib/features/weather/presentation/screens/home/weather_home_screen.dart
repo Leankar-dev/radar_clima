@@ -53,7 +53,6 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
       ),
       body: Stack(
         children: [
-          // --- Aurora: halo azul elétrico no canto superior esquerdo ---
           Positioned(
             top: -100,
             left: -80,
@@ -63,7 +62,6 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
               alpha: 55,
             ),
           ),
-          // --- Aurora: halo violeta no centro-direita ---
           Positioned(
             top: 200,
             right: -90,
@@ -73,20 +71,17 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
               alpha: 45,
             ),
           ),
-          // --- Aurora: halo azul suave na base ---
           Positioned(
             bottom: 40,
             left: 20,
             child: AuroraHalo(size: 220, color: AppColors.accent, alpha: 28),
           ),
-          // --- Conteúdo ---
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               child: Column(
                 children: [
                   const SizedBox(height: 8),
-                  // Campo de busca
                   Container(
                     decoration: BoxDecoration(
                       color: AppColors.white10,
