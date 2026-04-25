@@ -5,6 +5,7 @@ import 'package:radar_clima/core/errors/failure.dart';
 import 'package:radar_clima/features/weather/presentation/screens/widgets/aurora_halo.dart';
 import 'package:radar_clima/features/weather/presentation/screens/widgets/current_weather_card.dart';
 import 'package:radar_clima/shared/widgets/loading_overlay.dart';
+import 'package:radar_clima/shared/widgets/weather_app_bar.dart';
 import '../../providers/weather_notifier.dart';
 
 class WeatherHomeScreen extends ConsumerStatefulWidget {
@@ -15,14 +16,7 @@ class WeatherHomeScreen extends ConsumerStatefulWidget {
 }
 
 class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
-  // late final TextEditingController _cityEC;
   final _cityEC = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    // _cityEC = TextEditingController();
-  }
 
   @override
   void dispose() {
@@ -36,21 +30,9 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
+      // Permite que o conteúdo fique visivel atrás da AppBar, para o efeito de halo aurora funcionar melhor
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Center(
-          child: const Text(
-            'Radar Clima',
-            style: TextStyle(
-              color: AppColors.white90,
-              fontWeight: FontWeight.w300,
-              letterSpacing: 1.4,
-            ),
-          ),
-        ),
-      ),
+      appBar: const WeatherAppBar(),
       body: Stack(
         children: [
           Positioned(
